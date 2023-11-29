@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="app/css/style_uploads.css">
+    <title>Simulação de Empréstimo - Upload de Documentos</title>
+</head>
+<body>
+    <div class="content">
+        <h2>Envio de Documentos</h2>
+
+        <form id="uploadForm" action="confirmation.html">
+            <label for="documentCategory">Escolha a Categoria do Documento</label>
+            <select id="documentCategory" name="documentCategory">
+                <option value="idWithPhoto">Documento com Foto</option>
+                <option value="proofOfResidence">Comprovante de Residência</option>
+                <option value="selfie">Selfie</option>
+            </select>
+
+            <input type="file" id="documentFile" name="documentFile" accept=".jpg, .jpeg, .png, .pdf">
+
+            <button type="submit">Enviar Documento</button>
+        </form>
+    </div>
+
+    <script src="js/upload.js"></script>
+</body>
+</html>

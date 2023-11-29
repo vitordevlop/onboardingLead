@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="app/css/style_simulation.css">
+    <title>Simulação de Empréstimo</title>
+</head>
+<body>
+    <div class="content">
+        <h2>Simulação de Empréstimo</h2>
+        <form id="simulationForm">
+            <label for="loanAmount">Valor desejado:</label>
+            <input type="number" id="loanAmount" min="500" max="20000" step="500" required>
+            
+            <label for="loanTerm">Selecione o prazo:</label>
+            <input type="range" id="loanTerm" min="2" max="12" step="1" value="2">
+            <span id="loanTermValue">2</span>
+
+            <button type="button" onclick="simulateLoan()">Simular</button>
+        </form>
+    </div>
+
+    <script src="app/js/simulation.js"></script>
+</body>
+</html>

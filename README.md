@@ -36,10 +36,6 @@ A **Plataforma de Onboarding de Leads para Operação de Crédito** é uma aplic
 O projeto segue o padrão arquitetural MVC (Model-View-Controller), garantindo uma estrutura organizada e modular.
 
 
-### Testes:
-
-Exemplos preenchidos de planos de testes e relatórios de execução de teste de software estão disponíveis no diretório [Link para o Diretório de Testes](#).
-
 ### Instalação:
 
 1. Clone o repositório.

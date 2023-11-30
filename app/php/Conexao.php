@@ -9,10 +9,10 @@ class Conexao {
     public static function obterConexao() {
         if (!isset(self::$conexao)) {
             // Configurações do banco de dados
-            $host = "seu_host";
-            $usuario = "seu_usuario";
-            $senha = "sua_senha";
-            $banco = "seu_banco";
+            $host = "root";
+            $usuario = "root";
+            $senha = "root";
+            $banco = "ProjetoLead";
 
             // Conectar ao banco de dados (substitua com sua biblioteca de conexão preferida)
             self::$conexao = new mysqli($host, $usuario, $senha, $banco);

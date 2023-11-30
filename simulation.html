@@ -1,26 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="app/css/style_simulation.css">
     <title>Simulação de Empréstimo</title>
+    <link rel="stylesheet" href="app/css/style_simulation.css">
+
+    <style>
+
+    </style>
 </head>
 <body>
-    <div class="content">
-        <h2>Simulação de Empréstimo</h2>
-        <form id="simulationForm">
-            <label for="loanAmount">Valor desejado:</label>
-            <input type="number" id="loanAmount" min="500" max="20000" step="500" required>
-            
-            <label for="loanTerm">Selecione o prazo:</label>
-            <input type="range" id="loanTerm" min="2" max="12" step="1" value="2">
-            <span id="loanTermValue">2</span>
+    <form id="formSimulation">
+        <h1>Simulação de Empréstimo</h1>
 
-            <button type="button" onclick="simulateLoan()">Simular</button>
-        </form>
-    </div>
+        <label for="valor">Valor desejado:</label>
+        <div id="slider-container">
+            <input type="range" id="slider" name="valor" min="500" max="20000" step="100" value="500" oninput="updateSliderValue()">
+            <span id="valor">500</span> <!-- Mostra o valor atual do slider -->
+        </div>
 
-    <script src="app/js/simulation.js"></script>
+        <button type="button" onclick="simularEmprestimo()">Simular</button>
+    </form>
+
+    <script>
+    function updateSliderValue() {
+        const slider = document.getElementById('slider');
+        const valueSpan = document.getElementById('valor');
+        valueSpan.textContent = slider.value;
+    }
+
+    function simularEmprestimo() {
+        // Obter o valor do empréstimo
+        const valorEmprestimo = document.getElementById('slider').value;
+
+        // Redirecionar para a página de parcelas, passando o valor do empréstimo como parâmetro
+        window.location.href = `installments.html?valor=${valorEmprestimo}`;
+    }
+    </script>
 </body>
 </html>

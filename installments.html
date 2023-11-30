@@ -3,16 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="app/css/style_simulation.css">
-    <title>Parcelas</title>
+    <title>Simulação de Empréstimo - Parcelas</title>
+    <link rel="stylesheet" href="app/css/style_installments.css">
 </head>
 <body>
-    <div class="content">
-        <h2>Parcelas</h2>
-        <div id="installmentsList"></div>
-        <button onclick="redirectToUpload()">Próximo</button>
-    </div>
 
-    <script src="app/js/installments.js"></script>
+<h2>Escolha a Parcela desejada</h2>
+
+<!-- Exibir parcelas de 1 a 12x com taxa de 3% de juros -->
+<div id="installments-container">
+    <form id="installments-form">
+        <fieldset>
+            <legend>Parcelas Disponíveis</legend>
+
+            <!-- Adicionar radio buttons para cada parcela -->
+            <div id="installments-options">
+                <!-- O conteúdo será preenchido dinamicamente com JavaScript -->
+            </div>
+
+            <button type="button" onclick="avancarParaDocumentos()">Avançar</button>
+        </fieldset>
+    </form>
+</div>
+
+<script>
+    const valorEmprestimo = new URLSearchParams(window.location.search).get('valor');
+
+    // Função para calcular o valor da parcela com juros de 3%
+    function calcularValorParcela(parcela) {
+        const taxaJuros = 0.03; // 3%
+        const valorComJuros = parseFloat(valorEmprestimo) * (1 + taxaJuros);
+        return (valorComJuros / parcela).toFixed(2);
+    }
+
+    // Função para preencher dinamicamente as opções de parcelas
+    function preencherOpcoesParcelas() {
+        const installmentsOptions = document.getElementById('installments-options');
+
+        for (let i = 1; i <= 12; i++) {
+            const valorParcela = calcularValorParcela(i);
+            const label = `Parcela ${i} - R$ ${valorParcela}`;
+
+            const radioBtn = document.createElement('input');
+            radioBtn.type = 'radio';
+            radioBtn.name = 'parcela';
+            radioBtn.value = i;
+            radioBtn.id = `parcela-${i}`;
+            
+            const labelElement = document.createElement('label');
+            labelElement.htmlFor = `parcela-${i}`;
+            labelElement.textContent = label;
+
+            installmentsOptions.appendChild(radioBtn);
+            installmentsOptions.appendChild(labelElement);
+            installmentsOptions.appendChild(document.createElement('br'));
+        }
+    }
+
+    // Função para avançar para a próxima tela
+    function avancarParaDocumentos() {
+        const selectedInstallment = document.querySelector('input[name="parcela"]:checked');
+
+        if (selectedInstallment) {
+            const selectedInstallmentValue = selectedInstallment.value;
+            window.location.href = `upload.html?valor=${valorEmprestimo}&parcela=${selectedInstallmentValue}`;
+        } else {
+            alert('Selecione uma parcela antes de avançar.');
+        }
+    }
+
+    // Chamar a função ao carregar a página
+    preencherOpcoesParcelas();
+</script>
+
 </body>
 </html>

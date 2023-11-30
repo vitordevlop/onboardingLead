@@ -1,34 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="app/css/style_prospect.css">
     <title>Prospect</title>
+    <!-- Adicione seu link para o CSS aqui -->
+    <link rel="stylesheet" href="app/css/style_prospect.css">
+
 </head>
+<body>    
+    <form id="formProspect">
+        <h1>Faça Sua Simulação de Credito</h1>
 
-<body>
-    <div class="content">
-        <h1>Preencha seus dados</h1>
-        <form id="prospectForm">
-            <label for="cpf">CPF:</label>
-            <input type="text" id="cpf" name="cpf" required>
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" name="cpf" required>
 
-            <label for="name">Nome:</label>
-            <input type="text" id="name" name="name" required>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
 
-            <label for="phone">Telefone:</label>
-            <input type="tel" id="phone" name="phone" required>
+        <label for="telefone">Telefone:</label>
+        <input type="text" id="telefone" name="telefone" required>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
 
-            <button type="button" onclick="submitProspect()">Enviar</button>
-        </form>
-    </div>
+        <button type="button" onclick="salvarCliente()">Salvar e Avançar</button>
+    </form>
 
-    <script src="app/js/prospect.js"></script>
+    <script>
+        function salvarCliente() {
+            // Obter os valores dos campos do formulário
+            var cpf = document.getElementById("cpf").value;
+            var nome = document.getElementById("nome").value;
+            var telefone = document.getElementById("telefone").value;
+            var email = document.getElementById("email").value;
+
+            // Criar um objeto Cliente
+            var cliente = {
+                cpf: cpf,
+                nome: nome,
+                telefone: telefone,
+                email: email
+            };
+
+            // Enviar o objeto Cliente para o back-end (PHP) usando AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "app/php/Cliente.php", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Resposta do servidor (pode adicionar lógica adicional aqui)
+                    console.log(xhr.responseText);
+                    // Redirecionar para a próxima página
+                    window.location.href = "simulation.html";
+                }
+            };
+
+            // Converter o objeto Cliente para JSON
+            var jsonCliente = JSON.stringify(cliente);
+
+            // Enviar a requisição
+            xhr.send(jsonCliente);
+        }
+    </script>
 </body>
-
 </html>
